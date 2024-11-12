@@ -1,13 +1,11 @@
-- name: Update package cache on Ubuntu
-  ansible.builtin.apt:
-    update_cache: yes
-  when: ansible_distribution == "Ubuntu"
-
-- name: Install Java on Ubuntu
-  ansible.builtin.apt:
-    name: java-11-openjdk
-    state: present
-  when: ansible_distribution == "Ubuntu"
+- name: download java
+  become: ture
+  package:
+     name: "{{item}}"
+     state: present 
+  loop:
+     - apt-get update
+     - java-11-openjdk
 
 - name: download tomcat
   unarchive:
