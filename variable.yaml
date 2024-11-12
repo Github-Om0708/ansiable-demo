@@ -1,0 +1,30 @@
+- name: debug demo
+  hosts: all
+  vars: 
+    URL: cloudblitz.in
+  vars_files:
+    - ./file.txt
+  tasks:
+    - debug: 
+        msg: Hello world, {{ URL }} 
+      vars:
+        URL: local.cloudblitz.in 
+    - debug:
+        msg: My URL is, {{ URL }} 
+
+
+
+
+
+
+# cli variables  
+# local variable 
+# file variable
+# global variable
+
+
+#push 
+# git add 
+# git commit -m "commit msg"
+# git push origin main
+

@@ -1,0 +1,20 @@
+- name: debug demo
+  hosts: all
+  tasks:
+    - name: Print all available facts
+      debug:
+        var: ansible_facts
+
+
+
+
+
+#  if (x==2) {
+#     run condition1
+#  }
+#  else {
+#     run other condition2
+#  }       
+
+
+  

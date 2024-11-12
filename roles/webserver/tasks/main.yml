@@ -1,0 +1,22 @@
+- name: httpd package install
+  yum:
+    state: present
+    name: httpd 
+    
+- name: copy proxy file
+  copy:
+    src: proxy.conf
+    dest: "{{httpd_conf}}/proxy.conf"
+    force: yes
+  notify:
+    - httpd 
+
+- name: copy html content
+  get_url:
+      url: https://devops-b3-cbz.s3.ap-south-1.amazonaws.com/index.html    
+      dest: "{{httpd_root_dir}}/index.html"
+  
+- name: start httpd service
+  service:
+    name: httpd
+    state: started  

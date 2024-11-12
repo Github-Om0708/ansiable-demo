@@ -1,0 +1,42 @@
+- name: Webserver Playbook 
+  hosts: all
+  become: true
+  tasks:
+    - apt: 
+        name: "{{item}}"
+        state: present
+      loop:
+        - apache2
+        - git
+        - wget
+        - unzip 
+      when: ansible_distribution == "Ubuntu"
+    
+    - yum:
+        name: "{{item}}"
+        state: present
+      loop: 
+        - httpd
+        - git 
+        - wget 
+        - unzip 
+      when: ansible_distribution == "RedHat"
+    
+    - systemd_service:
+        name: apache2
+        state: started
+        enabled: true  
+      when: ansible_distribution == "Ubuntu"
+
+    - systemd_service:
+        name: httpd
+        state: started
+        enabled: true
+      when: ansible_distribution == "RedHat"
+    
+    - copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+      
+    
+    
