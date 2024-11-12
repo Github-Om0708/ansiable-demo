@@ -1,11 +1,9 @@
-- name: download java
-  package:
-    name: "{{item}}"
+- name: Download java
+  ansible.builtin.apt:
+    name: openjdk-11-jdk
     state: present
-  loop:
-     - apt-get update
-     - openjdk-11-jdk
-     
+  when: ansible_distribution == "Ubuntu"
+
 - name: download tomcat
   unarchive:
         src: "{{tomcat_url}}"
