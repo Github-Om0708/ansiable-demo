@@ -5,7 +5,7 @@
 
 - name: Install Java on Ubuntu
   ansible.builtin.apt:
-    name: openjdk-11-jdk
+    name: java-11-openjdk
     state: present
   when: ansible_distribution == "Ubuntu"
 
